@@ -70,7 +70,7 @@ Ensure your environment includes:
     cd RestAssured
     ```
 2. **Ensure API availability**  
-   Make sure your API is running locally or change configuration in `BaseTest`.
+   Make sure your API is running locally or change configuration in `Config.properties`.
 3. **Build and download dependencies**
     ```bash
     mvn clean compile
@@ -103,7 +103,7 @@ mvn test -Dtest=AuthenticationTests
 
 - **Console output**: Displays pass/fail for each test.
 - **Custom logging**: Enhance with Log4j/Sl4j or TestNG reports.
-- **(Optional)** Integrate with Allure or ExtentReports for rich HTML reporting.
+- **(Reporter)** Integrated ExtentReports for rich HTML reporting.
 
 ---
 
