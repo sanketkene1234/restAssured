@@ -11,7 +11,6 @@ A Java-based TestNG automation framework using **RestAssured** to validate RESTf
 - [Running Tests](#running-tests)
 - [Reporting & Logs](#reporting--logs)
 - [Contributing](#contributing)
-- [License](#license)
 
 ---
 
@@ -118,11 +117,6 @@ mvn test -Dtest=AuthenticationTests
 
 ---
 
-## 📜 License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
 
 ## 📚 Learn More
 
