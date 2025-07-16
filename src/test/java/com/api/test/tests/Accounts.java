@@ -2,28 +2,24 @@ package com.api.test.tests;
 
 import static io.restassured.RestAssured.given;
 import com.api.test.base.BaseSetUp;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.api.test.constants.ApiEndPoints;
-
+import com.api.test.utils.TestUtil;
 import io.restassured.response.Response;
 
-import com.api.test.ConfigReader;
-
 public class Accounts extends BaseSetUp {
-    public static final String CONTENT_TYPE = "application/json";
-    String user = Math.random() + "john_dodge";
-    String passWord = ConfigReader.get("password");
     static String token;
+    String loginPayload;
     static String  id;
     Response response;
 
     @Test(priority = 1)
     public void createUserApi() {
+        // getting login payload for test user
+        loginPayload=TestUtil.getLoginPayload(null, null);
         response = given()
-                .contentType(CONTENT_TYPE)
-                .body("{\"userName\": \"" + user + "\", \"password\": \"" + passWord + "\"}")
+                .body(loginPayload)
                 .log().all() // Log the request details
                 .when()
                 .post(ApiEndPoints.CREATE_USER)
@@ -41,8 +37,7 @@ public class Accounts extends BaseSetUp {
     @Test(priority = 2, dependsOnMethods = "createUserApi")
     public void generateTokenApi() {
         Response response = given()
-                .contentType(CONTENT_TYPE)
-                .body("{\"userName\": \"" + user + "\", \"password\": \"" + passWord + "\"}")
+                .body(loginPayload)
                 .log().all() // Log the request details
                 .when()
                 .post(ApiEndPoints.GENERATE_TOKEN)
@@ -62,7 +57,6 @@ public class Accounts extends BaseSetUp {
     public void getUserApi() {
 
         Response response = given()
-                .contentType(CONTENT_TYPE)
                 .header("Authorization", "Bearer " + token)
                 .pathParam("userId", id)
                 .when()
