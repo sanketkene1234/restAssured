@@ -1,134 +1,167 @@
-# 🚀 RestAssured + TestNG API Testing Suite
+# 📚 - BookServe QA Framework
 
-A Java-based TestNG automation framework using **RestAssured** to validate RESTful API endpoints.
-
-## 📋 Table of Contents
-
-- [Introduction](#introduction)
-- [Project Structure](#project-structure)
-- [Prerequisites](#prerequisites)
-- [Setup & Installation](#setup--installation)
-- [Running Tests](#running-tests)
-- [Reporting & Logs](#reporting--logs)
-- [Contributing](#contributing)
+This project is an API automation framework built to validate the core functionalities of a FastAPI-based BookStore application. It ensures comprehensive test coverage across CRUD operations, error handling, and authentication flows, with detailed reporting and CI integration.
 
 ---
 
-## 🧠 Introduction
+## 🔧 Tools & Framework Components
 
-This project leverages [RestAssured](https://rest-assured.io/) — a Java DSL simplifying REST API testing — in combination with TestNG. Write clean, declarative tests like:
+- **Java (17)**: Core programming language for framework logic  
+- **RestAssured**: RESTful API automation and validation  
+- **TestNG**: Test execution and configuration management  
+- **ExtentReports**: Generation of interactive HTML test reports  
+- **Maven**: Project build, dependency, and lifecycle management  
+- **GitHub Actions**: CI/CD pipeline for automated testing and deployment  
 
-```java
-given()
-  .param("key", "value")
-.when()
-  .get("/endpoint")
-.then()
-  .assertThat().statusCode(200)
-  .body("data.id", equalTo(123));
+---
+
+## 📊 Validation Scope
+
+The framework covers the following test scenarios for Health check, User, and Book APIs:
+
+### ✅ Expected Behavior Cases
+- Check service health (If server is running or not)
+- User sign-up and login with valid credentials
+- Create a new book with valid data
+- Retrieve all books
+- Retrieve a book by ID
+- Update a book
+- Delete a book
+
+### ❌ Adverse Condition Validations
+- Access APIs with invalid or missing tokens
+- Attempt to get non-existent books
+- Sign-up/login with invalid credentials
+
+
+## 🔗 Request Chaining
+
+The access token from the login API is dynamically injected into subsequent requests (e.g., create/update/delete book), enabling seamless request chaining.
+
+---
+
+## 📘 Quality Assurance Strategy
+
+### 🧪 1. API Test Case Architecture
+- Modular test classes for each resource: User, Book, and Health
+- Used `dependsOnGroups` to manage cross-class dependencies (e.g., Book tests depend on successful login)
+- Implemented request chaining for token-based authentication
+- Used data.json for data testing for cleaner code
+
+### 🧰 2. System Robustness & Serviceability
+- Configurable base URL and tokens using `config.properties`
+- Clear separation of concerns: logic, request specs, data, reporting
+- Assertions for status codes, response structure, and error messages
+- Positive and negative test cases for all endpoints
+- Common utility methods for validation
+- Used `BaseTest` and `Listeners` to manage test lifecycle and reports
+
+### 🧠 3. Challenges & Solutions
+
+| Challenge | Solution |
+|----------|----------|
+| APIs returned 500 instead of 422 for invalid input | Validated payloads and added assertions to catch backend issues |
+| APIs returned 400 but not mentioned in Swagger | Improve API documentation |
+| No Delete API for user | Suggest adding delete user API or managing user reusability |
+| Cross-class test dependencies | Switched to `dependsOnGroups` for better control |
+| No validation on empty email/book name | Suggested fixes on the backend side |
+
+---
+
+## ⚙️ CI/CD Pipeline
+
+### 🔁 Trigger:
+- Runs on every push and pull request to the `main` branch
+
+### 🚀 Steps in CI/CD Process:
+1. Checkout code
+2. Setup Java (Temurin 17)
+3. Build and run tests via Maven
+4. Upload test reports:
+   - **Surefire Reports (TestNG)**
+   - **ExtentReports (HTML)**
+   - **JaCoCo Code Coverage Reports**
+
+---
+
+## 🧱 Framework Structure
+
+```
+📦src
+ ┣ 📂main
+ ┃ ┗ 📂java (utils, config)
+ ┣ 📂test
+ ┃ ┣ 📂java
+ ┃ ┃ ┣ 📂tests
+ ┃ ┃ ┣ 📂utils
+ ┃ ┃ ┗ 📜BaseTest.java
+ ┃ ┗ 📜testng.xml
+┣ 📜pom.xml
+┣ 📜config.properties
+┣ 📜README.md
 ```
 
-It’s perfect for automated validation of REST services with readable syntax.
-
 ---
 
-## 🗂 Project Structure
+## ▶️ How to Run the Tests
 
-```
-src/
-└── test/
-    └── java/
-        └── com/yourorg/tests/
-            ├── BaseTest.java         # Initializes RestAssured and common configs
-            ├── AuthenticationTests.java
-            ├── FunctionalTests.java
-            └── DataDrivenTests.java
-pom.xml
-```
+### 🔧 Prerequisites
+- Java 17+
+- Maven 3.6+
+- Git
 
-- **BaseTest**: Defines shared configurations (base URI/port).
-- **Test Class**: Contains API calls and assertions.
-- **TestNG** is used as the test runner.
-
----
-
-## ✅ Prerequisites
-
-Ensure your environment includes:
-- **Java 8** or higher
-- **Maven 3.6+**
-- TestNG and RestAssured dependencies (see `pom.xml`)
-- Optionally: **Mock server / real API endpoint**
-
----
-
-## 🛠 Setup & Installation
-
-1. **Clone the repo**
-    ```bash
-    git clone https://github.com/sujata1992/RestAssured.git
-    cd RestAssured
-    ```
-2. **Ensure API availability**  
-   Make sure your API is running locally or change configuration in `Config.properties`.
-3. **Build and download dependencies**
-    ```bash
-    mvn clean compile
-    ```
-
----
-
-## ▶️ Running Tests
-
-Run tests via Maven or your IDE.
-
-### Using Maven:
+### 💻 Run Locally
 ```bash
-mvn test
+git clone https://github.com/sujata1992/RestAssured.git
+cd RestAssured
 ```
 
-### Through TestNG XML (parallel execution supported):
-```bash
-mvn test -Dsurefire.suiteXmlFiles=testng.xml
-```
-
-### Targeted test execution:
-```bash
-mvn test -Dtest=AuthenticationTests
-```
+- Update `config.properties` with your base URL (e.g., `url=http://localhost:8000`)
+- Run the test suite:
+  ```bash
+  mvn clean test
+  ```
+- View the report:
+  Open the generated report at: `test-output/testReport.html`
 
 ---
 
-## 📊 Reporting & Logs
+## 📈 Sample Report
 
-- **Console output**: Displays pass/fail for each test.
-- **Custom logging**: Enhance with Log4j/Sl4j or TestNG reports.
-- **(Reporter)** Integrated ExtentReports for rich HTML reporting.
+The framework generates a detailed **Extent Report** after each run with:
+
+- Test name and description
+- Pass/Fail/Skip status
+- Request/response logs
+- Assertion results
+
+---
+
+## 👁️ How to View GitHub Actions Reports
+
+1. Go to: [https://github.com/sujata1992/RestAssured/actions](https://github.com/sujata1992/RestAssured/actions)
+2. Click on the latest workflow run
+3. Scroll to **Artifacts** section
+
+### Download:
+- ✅ **Extent Report** (`ExtentReport.html`)
+- ✅ **Surefire Report**
+- ✅ **JaCoCo Code Coverage Report**
 
 ---
 
 ## 🤝 Contributing
 
-1. Fork the repo  
-2. Create a feature branch (`git checkout -b feature/new-tests`)  
-3. Add tests or fix bugs  
-4. Ensure all tests pass  
-5. Raise a pull request  
+- Fork the repo
+- Create your feature branch:
+  ```bash
+  git checkout -b feature/your-feature-name
+  ```
+- Commit and push
+- Submit a pull request
 
 ---
 
+## ✍️ Author
 
-## 📚 Learn More
-
-- [RestAssured Wiki](https://github.com/rest-assured/rest-assured/wiki/usage)
-- [RestAssured with TestNG Example](https://github.com/kamalgirdher/restassured_testNG)
-- [Advanced RestAssured Examples](https://github.com/eliasnogueira/restassured-complete-basic-example)
-
----
-
-### 🧪 Final Tips
-
-- Keep tests **independent** and **idempotent**
-- Use **Data Providers** for parameterized scenarios
-- Externalize config (e.g., base URI, credentials)
-- Incorporate **parallel execution** carefully to avoid shared state issues
+**Sujata Sihag**
