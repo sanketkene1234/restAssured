@@ -14,7 +14,12 @@ public class BaseSetUp {
 
     @BeforeSuite
     public static void setUp() {
-        RestAssured.baseURI = ConfigReader.get("base.url");
+        String env= ConfigReader.get("env");
+        if (env.equalsIgnoreCase("prod")) {
+            RestAssured.baseURI = ConfigReader.get("prodUrl");
+        } else {
+            RestAssured.baseURI = ConfigReader.get("url");
+        }
         RestAssured.requestSpecification = new RequestSpecBuilder()
                 .setContentType(ContentType.JSON)
                 .build();

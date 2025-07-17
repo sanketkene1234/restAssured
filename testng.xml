@@ -5,9 +5,10 @@
     </listeners>
     <test name="APITests">
         <classes>
-            <class name="com.api.test.tests.Accounts"/>
-            <class name="com.api.test.tests.Books"/>
-            <class name="com.api.test.tests.NegativeTests"/>
+            <class name="com.api.test.tests.HealthCheckTest"/>
+            <class name="com.api.test.tests.AccountsTests"/>
+            <class name="com.api.test.tests.BooksTest"/>
+            <class name="com.api.test.tests.NegativeBooksTest"/>
         </classes>
     </test>
 </suite>
