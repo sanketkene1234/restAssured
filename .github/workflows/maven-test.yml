@@ -28,8 +28,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
-      - name: Build and Test with Maven
-        run: mvn clean install
+      - name: Build and Test with Maven (with JaCoCo)
+        run: mvn clean install jacoco:report
 
       - name: Upload Extent Report
         if: always()
@@ -44,3 +44,10 @@ jobs:
         with:
           name: surefire-reports
           path: target/surefire-reports/
+
+      - name: Upload JaCoCo Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco/
