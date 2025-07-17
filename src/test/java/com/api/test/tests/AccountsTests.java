@@ -17,12 +17,8 @@ public class AccountsTests extends BaseSetUp {
     String userPayload;
     Response response;
 
-    @Test(priority = 1)
+    @Test(priority = 1, dependsOnGroups = "healthCheck", description = "Sign up a new user")
     public void signUpUser() {
-        // Implement the sign-up logic here
-        // This could involve sending a POST request to a sign-up endpoint
-        // and validating the response.
-
         userPayload = TestUtil.getSignUpPayload(null, null);
         Response response = given()
                 .body(userPayload)
@@ -39,7 +35,7 @@ public class AccountsTests extends BaseSetUp {
         Assert.assertEquals(message, "User created successfully", "Sign-up message mismatch");
     }
 
-    @Test(priority = 2, dependsOnMethods = "signUpUser")
+    @Test(priority = 2, dependsOnMethods = "signUpUser", description = "Verify user sign up and generate token")
     public void verifySignUpUserAndGenerateToken() {
         Response response = given()
                 .body(userPayload)
@@ -55,7 +51,7 @@ public class AccountsTests extends BaseSetUp {
         Assert.assertNotNull(token, "Token should not be null");
     }
 
-    @Test(priority = 3, dependsOnMethods = "signUpUser")
+    @Test(priority = 3, dependsOnMethods = "signUpUser", description = "Sign up with existing email")
     public void signUpwithExistingEmail() {
         Response response = given()
                 .body(userPayload)
@@ -72,7 +68,7 @@ public class AccountsTests extends BaseSetUp {
         Assert.assertEquals(message, "Email already registered", "Sign-up message mismatch for existing email");
     }
 
-    @Test(priority = 4, dependsOnMethods = "signUpUser")
+    @Test(priority = 4, dependsOnMethods = "signUpUser", description = "Login with incorrect password")
     public void loginWithIncorrectPassword() {
         JSONObject jsonObject = new JSONObject(userPayload);
         String email = jsonObject.getString("email");
@@ -92,9 +88,9 @@ public class AccountsTests extends BaseSetUp {
 
     }
 
-    @Test(priority = 5, dependsOnMethods = "signUpUser")
+    @Test(priority = 5, dependsOnMethods = "signUpUser", description = "Login with incorrect email")
     public void loginWithIncorrectEmail() {
-       JSONObject jsonObject = new JSONObject(userPayload);
+        JSONObject jsonObject = new JSONObject(userPayload);
         String password = jsonObject.getString("email");
 
         String incorrectEmailPayload = TestUtil.getSignUpPayload("email", password);
@@ -110,7 +106,6 @@ public class AccountsTests extends BaseSetUp {
         String message = response.jsonPath().getString("detail");
         Assert.assertEquals(message, "Incorrect email or password", "Login message mismatch for incorrect password");
 
-    
-}   
+    }
 
 }

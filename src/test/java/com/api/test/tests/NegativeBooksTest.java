@@ -12,8 +12,8 @@ import org.testng.annotations.Test;
 
 public class NegativeBooksTest extends BaseSetUp {
 
-    @Test(priority = 1, dependsOnMethods = { "com.api.test.tests.AccountsTests.signUpUser",
-            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" })
+    @Test(dependsOnMethods = { "com.api.test.tests.AccountsTests.signUpUser",
+            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" }, description = "Add a book with invalid token")
     public void addBookWithInvalidTokenTest() {
         String jsonPayload = TestUtil.readJsonFromFile("createBook.json");
         Response response = given()
@@ -28,7 +28,37 @@ public class NegativeBooksTest extends BaseSetUp {
         Assert.assertEquals(message, "Invalid token or expired token", "Error message mismatch");
     }
 
-    @Test(priority = 2, dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest")
+    @Test(dependsOnMethods = { "com.api.test.tests.AccountsTests.signUpUser",
+            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" }, description = "Update book with invalid token")
+    public void updateBookWithInvalidTokenTest() {
+        String updatePayload = TestUtil.readJsonFromFile("updateBook.json");
+        Response response = given()
+                .header("Authorization", "Bearer " + "invalid_token")
+                .log().all() // Log the request details
+                .body(updatePayload)
+                .when()
+                .put(String.format(ApiEndPoints.GET_BOOK_ID, BooksTest.bookId))
+                .then().log().all() // Log the response details
+                .statusCode(403).extract().response();
+        String message = response.jsonPath().getString("detail");
+        Assert.assertEquals(message, "Invalid token or expired token", "Error message mismatch");
+    }
+
+    @Test(dependsOnMethods = { "com.api.test.tests.AccountsTests.signUpUser",
+            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" }, description = "Delete book with invalid token")
+    public void deleteBookWithInvalidTokenTest() {
+        Response response = given()
+                .header("Authorization", "Bearer " + "invalid_token")
+                .log().all() // Log the request details
+                .when()
+                .put(String.format(ApiEndPoints.GET_BOOK_ID, BooksTest.bookId))
+                .then().log().all() // Log the response details
+                .statusCode(403).extract().response();
+        String message = response.jsonPath().getString("detail");
+        Assert.assertEquals(message, "Invalid token or expired token", "Error message mismatch");
+    }
+
+    @Test(dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest", description = "Get all books with invalid token")
     public void getAllBookWithInvalidTokenTest() {
         Response response = given()
                 .header("Authorization", "Bearer " + "invalid_token")
@@ -44,7 +74,7 @@ public class NegativeBooksTest extends BaseSetUp {
         Assert.assertEquals(message, "Invalid token or expired token", "Error message mismatch");
     }
 
-    @Test(priority = 2, dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest")
+    @Test(dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest", description = "Get book with non-existent ID")
     public void getBookWithNonExistantIdTest() {
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)
@@ -59,7 +89,7 @@ public class NegativeBooksTest extends BaseSetUp {
         Assert.assertEquals(message, "Book not found", "Error message mismatch");
     }
 
-    @Test(priority = 2, dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest")
+    @Test(priority = 2, dependsOnMethods = "com.api.test.tests.BooksTest.addBooksTest", description = "Get book with invalid ID")
     public void getBookWithInvalidIdTest() {
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)

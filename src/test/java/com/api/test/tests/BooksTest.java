@@ -11,12 +11,12 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 
 public class BooksTest extends BaseSetUp {
-    int bookId;
+    public static int bookId;
 
     String jsonPayload = TestUtil.readJsonFromFile("createBook.json");
 
     @Test(priority = 1, dependsOnMethods = { "com.api.test.tests.AccountsTests.signUpUser",
-            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" })
+            "com.api.test.tests.AccountsTests.verifySignUpUserAndGenerateToken" }, description = "Add a new book")
     public void addBooksTest() {
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)
@@ -31,7 +31,7 @@ public class BooksTest extends BaseSetUp {
 
     }
 
-    @Test(priority = 2, dependsOnMethods = "addBooksTest")
+    @Test(priority = 2, dependsOnMethods = "addBooksTest", description = "Get book by ID")
     public void getBookByIdTest() {
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)
@@ -48,7 +48,7 @@ public class BooksTest extends BaseSetUp {
 
     }
 
-    @Test(priority = 3, dependsOnMethods = "addBooksTest")
+    @Test(priority = 3, dependsOnMethods = "addBooksTest", description = "Update book by ID")
     public void updateBookByIdTest() {
         String updatePayload = TestUtil.readJsonFromFile("updateBook.json");
         Response response = given()
@@ -69,7 +69,7 @@ public class BooksTest extends BaseSetUp {
 
     }
 
-    @Test(priority = 4, dependsOnMethods = "addBooksTest")
+    @Test(priority = 4, dependsOnMethods = "addBooksTest", description = "Get all books")
     public void getAllBooks() {
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)
@@ -85,9 +85,8 @@ public class BooksTest extends BaseSetUp {
 
     }
 
-    @Test(priority = 5, dependsOnMethods = "addBooksTest")
+    @Test(priority = 5, dependsOnMethods = "addBooksTest", description = "Delete book by ID")
     public void deleteBookByIdTest() {
-
         Response response = given()
                 .header("Authorization", "Bearer " + AccountsTests.token)
                 .log().all() // Log the request details

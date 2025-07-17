@@ -1,4 +1,5 @@
 package com.api.test.tests;
+
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 
 public class HealthCheckTest extends BaseSetUp {
 
-    @Test(priority = 1)
+    @Test(priority = 1, groups = "healthCheck", description = "Health check to check if server is up")
     public void healthCheck() {
         Response response = given()
                 .log().all() // Log the request details
@@ -25,5 +26,5 @@ public class HealthCheckTest extends BaseSetUp {
         String status = response.jsonPath().getString("status");
         Assert.assertEquals(status, "up", "Health check status mismatch");
     }
-    
+
 }
