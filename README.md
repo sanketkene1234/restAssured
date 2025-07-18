@@ -141,7 +141,6 @@ cd RestAssured
 
 Extent Report (ExtentReports.html)
 
-
 Surefire Report
 ---
 
