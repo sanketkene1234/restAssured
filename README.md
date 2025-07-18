@@ -1,4 +1,4 @@
-# 📚 - Rest Assured Book APi CRUD OPerations Framework
+# 📚 - Rest Assured Book API  Framework
 
 This project is a robust API automation framework designed to verify the key functionalities of a FastAPI-powered BookStore application. It offers end-to-end test coverage for:
 
@@ -12,7 +12,7 @@ With comprehensive reporting and smooth CI/CD integration, this framework ensure
 
 ---
 
-🔧 Technologies & Framework Stack
+### 🔧 Technologies & Framework Stack
 
 - **Java (17)**: Core programming language for framework logic  
 - **RestAssured**: RESTful API automation and validation  
@@ -23,18 +23,24 @@ With comprehensive reporting and smooth CI/CD integration, this framework ensure
 
 ---
 
-📊 Scope of Test Coverage
+### 📊 Scope of Test Coverage
 
 The framework covers the following test scenarios for Health check, User, and Book APIs:
 
-✅ Expected Functional Outcomes
-- Check service health (If server is running or not)
-- User sign-up and login with valid credentials
-- Create a new book with valid data
-- Retrieve all books
-- Retrieve a book by ID
-- Update a book
-- Delete a book
+ ### ✅ Expected Functional Outcomes
+Verify if the server is up and running
+
+Register a new user and log in with valid credentials
+
+Add a new book using valid input data
+
+Fetch the complete list of books
+
+Retrieve details of a specific book by its ID
+
+Modify the details of an existing book
+
+Remove a book from the system
 
 ### Negative Validations
 - Access APIs with invalid or missing tokens
