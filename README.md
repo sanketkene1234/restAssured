@@ -1,10 +1,18 @@
-# 📚 - BookServe QA Framework
+# 📚 - Rest Assured Book APi CRUD OPerations Framework
 
-This project is an API automation framework built to validate the core functionalities of a FastAPI-based BookStore application. It ensures comprehensive test coverage across CRUD operations, error handling, and authentication flows, with detailed reporting and CI integration.
+This project is a robust API automation framework designed to verify the key functionalities of a FastAPI-powered BookStore application. It offers end-to-end test coverage for:
+
+🔁 CRUD operations (Create, Read, Update, Delete)
+
+⚠️ Error and edge case handling
+
+🔐 Authentication and security validations
+
+With comprehensive reporting and smooth CI/CD integration, this framework ensures consistent, high-quality feedback throughout the development lifecycle.
 
 ---
 
-## 🔧 Tools & Framework Components
+🔧 Technologies & Framework Stack
 
 - **Java (17)**: Core programming language for framework logic  
 - **RestAssured**: RESTful API automation and validation  
@@ -15,11 +23,11 @@ This project is an API automation framework built to validate the core functiona
 
 ---
 
-## 📊 Validation Scope
+📊 Scope of Test Coverage
 
 The framework covers the following test scenarios for Health check, User, and Book APIs:
 
-### ✅ Expected Behavior Cases
+✅ Expected Functional Outcomes
 - Check service health (If server is running or not)
 - User sign-up and login with valid credentials
 - Create a new book with valid data
@@ -28,7 +36,7 @@ The framework covers the following test scenarios for Health check, User, and Bo
 - Update a book
 - Delete a book
 
-### ❌ Adverse Condition Validations
+### Negative Validations
 - Access APIs with invalid or missing tokens
 - Attempt to get non-existent books
 - Sign-up/login with invalid credentials
@@ -40,15 +48,20 @@ The access token from the login API is dynamically injected into subsequent requ
 
 ---
 
-## 📘 Quality Assurance Strategy
+## 📘 Test Strategy
 
-### 🧪 1. API Test Case Architecture
-- Modular test classes for each resource: User, Book, and Health
-- Used `dependsOnGroups` to manage cross-class dependencies (e.g., Book tests depend on successful login)
-- Implemented request chaining for token-based authentication
-- Used data.json for data testing for cleaner code
+🧪 1. API Test Case Architecture
+Designed modular test classes for each core resource: User, Book, and Health
 
-### 🧰 2. System Robustness & Serviceability
+Leveraged dependsOnGroups to handle inter-class dependencies (e.g., Book tests require a successful login)
+
+Implemented request chaining to support token-based authentication flows
+
+Utilized a centralized data.json file for input data, promoting cleaner and more maintainable test code
+
+
+
+### 🧰 2.Scalability
 - Configurable base URL and tokens using `config.properties`
 - Clear separation of concerns: logic, request specs, data, reporting
 - Assertions for status codes, response structure, and error messages
@@ -56,15 +69,16 @@ The access token from the login API is dynamically injected into subsequent requ
 - Common utility methods for validation
 - Used `BaseTest` and `Listeners` to manage test lifecycle and reports
 
-### 🧠 3. Challenges & Solutions
+ ## 🧠 3. Challenges & Resolutions
 
-| Challenge | Solution |
-|----------|----------|
-| APIs returned 500 instead of 422 for invalid input | Validated payloads and added assertions to catch backend issues |
-| APIs returned 400 but not mentioned in Swagger | Improve API documentation |
-| No Delete API for user | Suggest adding delete user API or managing user reusability |
-| Cross-class test dependencies | Switched to `dependsOnGroups` for better control |
-| No validation on empty email/book name | Suggested fixes on the backend side |
+| **Challenge**                                          | **Resolution**                                                                      |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------- |
+| API returned `500` instead of `422` for invalid inputs | Implemented payload validation and added assertions to identify backend misbehavior |
+| API returned `400` for undocumented cases              | Recommended enhancing Swagger documentation for accuracy                            |
+| Missing Delete API for User resource                   | Proposed adding a Delete endpoint or implementing user reuse strategies in tests    |
+| Interdependent test classes causing execution issues   | Adopted `dependsOnGroups` to manage test flow more effectively                      |
+| No backend validation for empty email or book name     | Highlighted the issue and suggested server-side input validation                    |
+
 
 ---
 
