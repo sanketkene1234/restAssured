@@ -1,4 +1,4 @@
-#  - Rest Assured Book API  Framework
+## Rest Assured Book API  Framework
 
 This project is a robust API automation framework designed to verify the key functionalities of a FastAPI-powered BookStore application. It offers end-to-end test coverage for:
 
@@ -12,7 +12,7 @@ With comprehensive reporting and smooth CI/CD integration, this framework ensure
 
 ---
 
-### 🔧 Technologies & Framework Stack
+###  Technologies & Framework Stack
 
 Java (17): Primary language used to implement framework logic
 
@@ -28,24 +28,24 @@ GitHub Actions: Enables CI/CD for automated testing and deployments
 
 ---
 
-### 📊 Scope of Test Coverage
+###  Scope of Test Coverage
 
 The framework covers the following test scenarios for Health check, User, and Book APIs:
 
- ### ✅ Expected Functional Outcomes
-Verify if the server is up and running
+ ###  Expected Functional Outcomes
+- Verify if the server is up and running
 
-Register a new user and log in with valid credentials
+- Register a new user and log in with valid credentials
 
-Add a new book using valid input data
+- Add a new book using valid input data
 
-Fetch the complete list of books
+- Fetch the complete list of books
 
-Retrieve details of a specific book by its ID
+- Retrieve details of a specific book by its ID
 
-Modify the details of an existing book
+- Modify the details of an existing book
 
-Remove a book from the system
+- Remove a book from the system
 
 ### Negative Validations
 - Access APIs with invalid or missing tokens
@@ -53,26 +53,26 @@ Remove a book from the system
 - Sign-up/login with invalid credentials
 
 
-## 🔗 Request Chaining
+## Request Chaining
 
-The access token from the login API is dynamically injected into subsequent requests (e.g., create/update/delete book), enabling seamless request chaining.
+The access token obtained from the login API is dynamically applied to subsequent requests—such as create, update, and delete book operations—facilitating smooth request chaining.
 
 ---
 
-## 📘 Test Strategy
+##  Test Strategy
 
-🧪 1. API Test Case Architecture
-Designed modular test classes for each core resource: User, Book, and Health
+ 1. API Test Case Architecture
+- Designed modular test classes for each core resource: User, Book, and Health
 
-Leveraged dependsOnGroups to handle inter-class dependencies (e.g., Book tests require a successful login)
+- Leveraged dependsOnGroups to handle inter-class dependencies (e.g., Book tests require a successful login)
 
-Implemented request chaining to support token-based authentication flows
+- Implemented request chaining to support token-based authentication flows
 
-Utilized a centralized data.json file for input data, promoting cleaner and more maintainable test code
+- Utilized a centralized data.json file for input data, promoting cleaner and more maintainable test code
 
 
 
-### 🧰 2.Scalability
+###  2.Scalability
 - Configurable base URL and tokens using `config.properties`
 - Clear separation of concerns: logic, request specs, data, reporting
 - Assertions for status codes, response structure, and error messages
@@ -80,7 +80,7 @@ Utilized a centralized data.json file for input data, promoting cleaner and more
 - Common utility methods for validation
 - Used `BaseTest` and `Listeners` to manage test lifecycle and reports
 
- ## 🧠 3. Challenges & Resolutions
+ ##  3. Challenges & Resolutions
 
 | **Challenge**                                          | **Resolution**                                                                      |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------------- |
@@ -93,12 +93,12 @@ Utilized a centralized data.json file for input data, promoting cleaner and more
 
 ---
 
-## ⚙️ CI/CD Pipeline
+##  CI/CD Pipeline
 
-### 🔁 Trigger:
+###  Trigger:
 - Runs on every push and pull request to the `main` branch
 
-### 🚀 Steps in CI/CD Process:
+###  Steps in CI/CD Process:
 1. Checkout code
 2. Setup Java (Temurin 17)
 3. Build and run tests via Maven
@@ -109,33 +109,14 @@ Utilized a centralized data.json file for input data, promoting cleaner and more
 
 ---
 
-## 🧱 Framework Structure
+##  How to Run the Tests
 
-```
-📦src
- ┣ 📂main
- ┃ ┗ 📂java (utils, config)
- ┣ 📂test
- ┃ ┣ 📂java
- ┃ ┃ ┣ 📂tests
- ┃ ┃ ┣ 📂utils
- ┃ ┃ ┗ 📜BaseTest.java
- ┃ ┗ 📜testng.xml
-┣ 📜pom.xml
-┣ 📜config.properties
-┣ 📜README.md
-```
-
----
-
-## ▶️ How to Run the Tests
-
-### 🔧 Prerequisites
+###  Prerequisites
 - Java 17+
 - Maven 3.6+
 - Git
 
-### 💻 Run Locally
+###  Run Locally
 ```bash
 git clone https://github.com/sujata1992/RestAssured.git
 cd RestAssured
@@ -151,17 +132,9 @@ cd RestAssured
 
 ---
 
-## 📈 Sample Report
-
-The framework generates a detailed **Extent Report** after each run with:
-
-- Test name and description
-- Pass/Fail/Skip status
-- Assertion results
-
 ---
 
-## 👁️ How to View GitHub Actions Reports
+##  How to View GitHub Actions Reports
 
 1. Go to: [https://github.com/sujata1992/RestAssured/actions](https://github.com/sujata1992/RestAssured/actions)
 2. Click on the latest workflow run
@@ -174,18 +147,18 @@ The framework generates a detailed **Extent Report** after each run with:
 
 ---
 
-## 🤝 Contributing
+##  Contributing
 
-- Fork the repo
-- Create your feature branch:
-  ```bash
-  git checkout -b feature/your-feature-name
-  ```
-- Commit and push
-- Submit a pull request
+--Fork the repo
+
+--Create your feature branch (git checkout -b feature/add-new-test)
+
+--Commit and push
+
+--Submit a pull request
 
 ---
 
-## ✍️ Author
+##  Author
 
 **Sujata Sihag**
