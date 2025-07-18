@@ -1,4 +1,4 @@
-# 📚 - Rest Assured Book API  Framework
+#  - Rest Assured Book API  Framework
 
 This project is a robust API automation framework designed to verify the key functionalities of a FastAPI-powered BookStore application. It offers end-to-end test coverage for:
 
@@ -14,12 +14,17 @@ With comprehensive reporting and smooth CI/CD integration, this framework ensure
 
 ### 🔧 Technologies & Framework Stack
 
-- **Java (17)**: Core programming language for framework logic  
-- **RestAssured**: RESTful API automation and validation  
-- **TestNG**: Test execution and configuration management  
-- **ExtentReports**: Generation of interactive HTML test reports  
-- **Maven**: Project build, dependency, and lifecycle management  
-- **GitHub Actions**: CI/CD pipeline for automated testing and deployment  
+Java (17): Primary language used to implement framework logic
+
+RestAssured: For automating and validating RESTful API endpoints
+
+TestNG: Manages test execution flow and configurations
+
+ExtentReports: Produces rich, interactive HTML reports for test results
+
+Maven: Handles project builds, dependencies, and lifecycle phases
+
+GitHub Actions: Enables CI/CD for automated testing and deployments 
 
 ---
 
@@ -152,7 +157,6 @@ The framework generates a detailed **Extent Report** after each run with:
 
 - Test name and description
 - Pass/Fail/Skip status
-- Request/response logs
 - Assertion results
 
 ---
