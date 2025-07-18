@@ -105,7 +105,6 @@ The access token obtained from the login API is dynamically applied to subsequen
 4. Upload test reports:
    - **Surefire Reports (TestNG)**
    - **ExtentReports (HTML)**
-   - **JaCoCo Code Coverage Reports**
 
 ---
 
@@ -136,15 +135,14 @@ cd RestAssured
 
 ##  How to View GitHub Actions Reports
 
-1. Go to: [https://github.com/sujata1992/RestAssured/actions](https://github.com/sujata1992/RestAssured/actions)
-2. Click on the latest workflow run
-3. Scroll to **Artifacts** section
+--Go to repo URL [(https://github.com/sujata1992/RestAssured)] → Actions Click on the latest workflow run. Scroll to Artifacts.
 
-### Download:
-- ✅ **Extent Report** (`ExtentReport.html`)
-- ✅ **Surefire Report**
-- ✅ **JaCoCo Code Coverage Report**
+--Download-
 
+Extent Report (ExtentReports.html)
+
+
+Surefire Report
 ---
 
 ##  Contributing
