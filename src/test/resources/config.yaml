@@ -1,0 +1,8 @@
+environments:
+  dev:
+    base_url: "http://127.0.0.1:8000"
+  qa:
+    base_url: "https://qa.bookstore.example"
+  prod:
+    base_url: "https://api.bookstore.example"
+default: dev
