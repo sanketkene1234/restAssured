@@ -1,0 +1,4 @@
+com\example\bookstore\steps\AuthSteps.class
+com\example\bookstore\utils\TestContext.class
+com\example\bookstore\steps\CommonSteps.class
+com\example\bookstore\runners\CucumberTestRunner.class
